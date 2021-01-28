@@ -1,0 +1,16 @@
+#!usr/bin/env python                            
+
+import rospy                                    #Imports ROSPY 
+from sensor_msgs.msg import BatteryState        #Imports defined "BatteyState" message from package
+
+def callback(msg):
+        percentage = msg.header.percentage
+        rospy.loginfo('Battery: {}', format(percentage))
+
+if __name__ == '__main__':
+        rospy.init.node('battery_info')         #Initializes as node
+
+        rospy.Subscriber("/battery_state", BatteryState, callback)
+
+        rospy.spin()
+
